@@ -12,16 +12,22 @@ using System.Windows.Forms;
 
 namespace ChatTCP
 {
-    public partial class Client : Form
+    internal partial class Client : Form
     {
         public const int MAX_IP_LEN = 25;
+
+        public User localUser;
+
+        public bool hostingServer;
+        public int maxUsers;
+        public Server hostedServer;
 
         public Client()
         {
             InitializeComponent();
         }
 
-        private void ipConnect_Click(object sender, EventArgs e)
+        private void IPConnect_Click(object sender, EventArgs e)
         {
             if (IsValidIP(ipInput.Text, out string output))
             {
@@ -29,7 +35,7 @@ namespace ChatTCP
             }
         }
 
-        private void ipInput_TextChanged(object sender, EventArgs e)
+        private void IPInput_TextChanged(object sender, EventArgs e)
         {
             // Make sure the input doesn't exceed the allowed length
             // I would freeze the text as it is, were I to know how to
@@ -49,6 +55,52 @@ namespace ChatTCP
             }
         }
 
+        private void HostButton_Click(object sender, EventArgs e)
+        {
+            hostingServer = true;
+            hostedServer = new Server(maxUsers);
+
+            if (maxUsers == 0)
+            {
+                MessageBox.Show("Please input a valid max user amount!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void HostInput_TextChanged(object sender, EventArgs e)
+        {
+            // Check if the IP is valid, if so, have the button be enabled
+            if (IsValidIP(hostInput.Text, out string output))
+            {
+                hostButton.Enabled = true;
+            }
+            else // Otherwise, no button!
+            {
+                hostButton.Enabled = false;
+            }
+        }
+
+        private void MaxUsersInput_TextChanged(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(maxUserInput.Text))
+            {
+                maxUsers = 0;
+            }
+            else
+            {
+                if (int.TryParse(maxUserInput.Text, out int result))
+                {
+                    maxUsers = result;
+                }
+                else
+                {
+                    maxUsers = 0;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Is the input a valid IP address?
+        /// </summary>
         private bool IsValidIP(string input, out string output)
         {
             // Array of valid numbers, concat'd to one string to check if a valid int
@@ -60,17 +112,25 @@ namespace ChatTCP
                 // Skip the .'s in e.g. "192.168.0.1"
                 if (input[i] == '.')
                 {
-                    i++;
+                    validNums[i] = validNums[i - 1];
                     continue;
                 }
-                else // Otherwise, the input is a valid number
+                else // Otherwise, the input is (presumably) a number
                 {
                     validNums[i] = input[i];
                 }
             }
 
-            // Output the resulting numbers
-            output = string.Concat(validNums);
+            if (input == "localhost")
+            {
+                // The client's local IP
+                output = "127001";
+            }
+            else
+            {
+                // Output the resulting numbers
+                output = string.Concat(validNums);
+            }
             // Return true if the output (validNums[]) is an int
             return int.TryParse(output, out int result);
         }
