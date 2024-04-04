@@ -1,0 +1,87 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|c:\\users\\loke.vigstrand\\skolprojekt\\vs22\\chattcp\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|solutionrelative:client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|c:\\users\\loke.vigstrand\\skolprojekt\\vs22\\chattcp\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|solutionrelative:client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|c:\\users\\loke.vigstrand\\skolprojekt\\vs22\\chattcp\\client.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|solutionrelative:client.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|c:\\users\\loke.vigstrand\\skolprojekt\\vs22\\chattcp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Client.cs",
+              "DocumentMoniker": "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\Client.cs",
+              "RelativeDocumentMoniker": "Client.cs",
+              "ToolTip": "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\Client.cs",
+              "RelativeToolTip": "Client.cs",
+              "ViewState": "AQIAAC8AAAAAAAAAAADwv0MAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T10:30:05.538Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Client.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\Client.cs",
+              "RelativeDocumentMoniker": "Client.cs",
+              "ToolTip": "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\Client.cs [Design]",
+              "RelativeToolTip": "Client.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T10:29:38.694Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T10:29:10.847Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Client.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\Client.Designer.cs",
+              "RelativeDocumentMoniker": "Client.Designer.cs",
+              "ToolTip": "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\Client.Designer.cs",
+              "RelativeToolTip": "Client.Designer.cs",
+              "ViewState": "AQIAACcAAAAAAAAAAAASwDoAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-04T10:28:52.765Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

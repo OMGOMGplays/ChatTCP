@@ -1,0 +1,10 @@
+C:\Users\Loke.Vigstrand\Skolprojekt\VS22\ChatTCP\obj\Debug\ChatTCP.csproj.AssemblyReference.cache
+C:\Users\Loke.Vigstrand\Skolprojekt\VS22\ChatTCP\obj\Debug\ChatTCP.Properties.Resources.resources
+C:\Users\Loke.Vigstrand\Skolprojekt\VS22\ChatTCP\obj\Debug\ChatTCP.csproj.GenerateResource.cache
+C:\Users\Loke.Vigstrand\Skolprojekt\VS22\ChatTCP\obj\Debug\ChatTCP.csproj.CoreCompileInputs.cache
+C:\Users\Loke.Vigstrand\Skolprojekt\VS22\ChatTCP\bin\Debug\ChatTCP.exe.config
+C:\Users\Loke.Vigstrand\Skolprojekt\VS22\ChatTCP\bin\Debug\ChatTCP.exe
+C:\Users\Loke.Vigstrand\Skolprojekt\VS22\ChatTCP\bin\Debug\ChatTCP.pdb
+C:\Users\Loke.Vigstrand\Skolprojekt\VS22\ChatTCP\obj\Debug\ChatTCP.Client.resources
+C:\Users\Loke.Vigstrand\Skolprojekt\VS22\ChatTCP\obj\Debug\ChatTCP.exe
+C:\Users\Loke.Vigstrand\Skolprojekt\VS22\ChatTCP\obj\Debug\ChatTCP.pdb
