@@ -14,16 +14,20 @@ namespace ChatTCP
 {
     internal partial class Client : Form
     {
-        // Important variables
+        // Constant variables
         public const int MAX_IP_LEN = 25;
+
+        // Servers
+        public Server[] servers = new Server[2048]; // Arbitrary amount
 
         // Local
         public User localUser;
 
         // Hosting
         public bool hostingServer;
-        public int maxUsers;
+        public int serverMaxUsers;
         public string serverName;
+        public string serverIP;
         public Server hostedServer;
 
         public Client()
@@ -31,11 +35,16 @@ namespace ChatTCP
             InitializeComponent();
         }
 
+        #region INPUT
         private void IPConnect_Click(object sender, EventArgs e)
         {
             if (IsValidIP(ipInput.Text, out string output))
             {
                 TryConnect(output);
+
+#if DEBUG
+                Console.WriteLine($"Attempting to connect to IP address {output}...");
+#endif // DEBUG
             }
         }
 
@@ -65,6 +74,7 @@ namespace ChatTCP
             if (IsValidIP(hostInput.Text, out string output))
             {
                 hostButton.Enabled = true;
+                serverIP = output; // Set the server's IP address
             }
             else // Otherwise, no button!
             {
@@ -74,19 +84,22 @@ namespace ChatTCP
 
         private void MaxUsersInput_TextChanged(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(maxUserInput.Text))
+            // Can't set null as a user count
+            if (string.IsNullOrEmpty(maxUserInput.Text))
             {
-                maxUsers = 0;
+                serverMaxUsers = 0;
             }
             else
             {
                 if (int.TryParse(maxUserInput.Text, out int result))
                 {
-                    maxUsers = result;
+                    // maxUsers is now the set input!
+                    serverMaxUsers = result;
                 }
                 else
                 {
-                    maxUsers = 0;
+                    // No proper input, maxUsers is 0
+                    serverMaxUsers = 0;
                 }
             }
         }
@@ -105,20 +118,30 @@ namespace ChatTCP
 
         private void HostButton_Click(object sender, EventArgs e)
         {
-            if (maxUsers == 0)
+            // Show an error if the serverMaxUsers is 0
+            if (serverMaxUsers == 0)
             {
                 MessageBox.Show("Please input a valid max user amount!\nThe range is from 1 to 60 users.", "Error - maxUsers", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             if (IsValidIP(hostInput.Text, out string output))
             {
-                hostingServer = true;
-                hostedServer = new Server(maxUsers, serverName);
+                hostingServer = true; // Don't allow the client to join another server while hosting
+                hostedServer = new Server(serverMaxUsers, serverName, serverIP); // Make the server and fill its variables
+                servers.Append(hostedServer);
 
-
+#if DEBUG
+                // Write the info of the new server
+                Console.WriteLine($"Making a new server...\n" +
+                    $"  serverIP : {serverIP}\n" +
+                    $"  serverMaxUsers : {serverMaxUsers}\n" +
+                    $"  serverName : {serverName}");
+#endif // DEBUG
             }
         }
+        #endregion // INPUT
 
+        #region CONNECTION_HANDLERS
         /// <summary>
         /// Is the input a valid IP address?
         /// </summary>
@@ -133,7 +156,7 @@ namespace ChatTCP
                 // Skip the .'s in e.g. "192.168.0.1"
                 if (input[i] == '.')
                 {
-                    validNums[i] = validNums[i - 1];
+                    validNums[i] = '\0';
                     continue;
                 }
                 else // Otherwise, the input is (presumably) a number
@@ -158,10 +181,8 @@ namespace ChatTCP
 
         private bool TryConnect(string ip)
         {
-            int intIP = int.Parse(ip);
-            Socket sock = new Socket(AddressFamily.Unspecified, SocketType.Stream, ProtocolType.Tcp);
-
-            return true;
+            return ip == null ? false : true;
         }
+        #endregion // CONNECTION_HANDLERS
     }
 }
