@@ -11,12 +11,14 @@ namespace ChatTCP
         public const int MAX_USERS = 60;
 
         public int maxUsers = 4;
+        public string serverName = "Server";
         public int ipAddr;
         public User[] users = new User[MAX_USERS];
 
-        public Server(int maxUsers)
+        public Server(int maxUsers, string serverName)
         {
             this.maxUsers = maxUsers;
+            this.serverName = serverName;
         }
 
         public void JoinServer(User newUser)

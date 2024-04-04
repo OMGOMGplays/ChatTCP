@@ -37,6 +37,8 @@
             this.hostButton = new System.Windows.Forms.Button();
             this.maxUserInput = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.serverNameInput = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ipConnect
@@ -74,7 +76,7 @@
             // 
             // hostInput
             // 
-            this.hostInput.Location = new System.Drawing.Point(143, 350);
+            this.hostInput.Location = new System.Drawing.Point(735, 167);
             this.hostInput.Name = "hostInput";
             this.hostInput.Size = new System.Drawing.Size(203, 22);
             this.hostInput.TabIndex = 5;
@@ -87,7 +89,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(182, 327);
+            this.label2.Location = new System.Drawing.Point(774, 139);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(126, 16);
             this.label2.TabIndex = 4;
@@ -97,17 +99,17 @@
             // 
             this.hostButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.hostButton.Enabled = false;
-            this.hostButton.Location = new System.Drawing.Point(143, 450);
+            this.hostButton.Location = new System.Drawing.Point(979, 277);
             this.hostButton.Name = "hostButton";
             this.hostButton.Size = new System.Drawing.Size(203, 42);
             this.hostButton.TabIndex = 3;
-            this.hostButton.Text = "Start hosting specified IP";
+            this.hostButton.Text = "Start hosting on specified IP";
             this.hostButton.UseVisualStyleBackColor = true;
             this.hostButton.Click += new System.EventHandler(this.HostButton_Click);
             // 
             // maxUserInput
             // 
-            this.maxUserInput.Location = new System.Drawing.Point(143, 408);
+            this.maxUserInput.Location = new System.Drawing.Point(735, 228);
             this.maxUserInput.Name = "maxUserInput";
             this.maxUserInput.Size = new System.Drawing.Size(203, 22);
             this.maxUserInput.TabIndex = 7;
@@ -120,11 +122,32 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(205, 385);
+            this.label3.Location = new System.Drawing.Point(800, 205);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(68, 16);
             this.label3.TabIndex = 6;
             this.label3.Text = "Max users";
+            // 
+            // serverNameInput
+            // 
+            this.serverNameInput.Location = new System.Drawing.Point(979, 228);
+            this.serverNameInput.Name = "serverNameInput";
+            this.serverNameInput.Size = new System.Drawing.Size(203, 22);
+            this.serverNameInput.TabIndex = 9;
+            this.serverNameInput.Tag = "";
+            this.serverNameInput.TextChanged += new System.EventHandler(this.serverNameInput_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(1034, 205);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(84, 16);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Server name";
             // 
             // Client
             // 
@@ -132,6 +155,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1262, 673);
+            this.Controls.Add(this.serverNameInput);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.maxUserInput);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.hostInput);
@@ -158,6 +183,8 @@
         private System.Windows.Forms.Button hostButton;
         private System.Windows.Forms.TextBox maxUserInput;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox serverNameInput;
+        private System.Windows.Forms.Label label4;
     }
 }
 

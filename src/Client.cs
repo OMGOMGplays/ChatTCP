@@ -14,12 +14,16 @@ namespace ChatTCP
 {
     internal partial class Client : Form
     {
+        // Important variables
         public const int MAX_IP_LEN = 25;
 
+        // Local
         public User localUser;
 
+        // Hosting
         public bool hostingServer;
         public int maxUsers;
+        public string serverName;
         public Server hostedServer;
 
         public Client()
@@ -55,17 +59,6 @@ namespace ChatTCP
             }
         }
 
-        private void HostButton_Click(object sender, EventArgs e)
-        {
-            hostingServer = true;
-            hostedServer = new Server(maxUsers);
-
-            if (maxUsers == 0)
-            {
-                MessageBox.Show("Please input a valid max user amount!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void HostInput_TextChanged(object sender, EventArgs e)
         {
             // Check if the IP is valid, if so, have the button be enabled
@@ -95,6 +88,34 @@ namespace ChatTCP
                 {
                     maxUsers = 0;
                 }
+            }
+        }
+
+        private void serverNameInput_TextChanged(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(serverNameInput.Text))
+            {
+                serverName = "Server";
+            }
+            else
+            {
+                serverName = serverNameInput.Text;
+            }
+        }
+
+        private void HostButton_Click(object sender, EventArgs e)
+        {
+            if (maxUsers == 0)
+            {
+                MessageBox.Show("Please input a valid max user amount!\nThe range is from 1 to 60 users.", "Error - maxUsers", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            if (IsValidIP(hostInput.Text, out string output))
+            {
+                hostingServer = true;
+                hostedServer = new Server(maxUsers, serverName);
+
+
             }
         }
 
