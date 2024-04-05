@@ -49,7 +49,7 @@ namespace ChatTCP
                     "Error - User",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
-                usernameInput.Clear();
+                usernameInput.MaxLength = User.MAX_USERNAME_LEN + 1;
             }
 
             localUser.username = usernameInput.Text;
@@ -95,7 +95,7 @@ namespace ChatTCP
                 {
                     // Display an error pop-up describing what's wrong
                     MessageBox.Show(
-                        "Can't connect to localhost, that is your client!",
+                        "Can't connect to localhost, that's your client!",
                         "Error - Connecting",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
@@ -160,7 +160,7 @@ namespace ChatTCP
 
         private void ServerNameInput_TextChanged(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(serverNameInput.Text))
+            if (string.IsNullOrEmpty(serverNameInput.Text))
             {
                 serverName = "Server";
             }
@@ -203,6 +203,8 @@ namespace ChatTCP
                     localUser.username = $"User {rnd.Next(0, 10000)}";
                 }
 
+                serverIP = output;
+
                 // Make the server and fill its variables
                 hostedServer = new Server(serverMaxUsers, serverIP, serverName);
 
@@ -227,17 +229,13 @@ namespace ChatTCP
         {
             int[] ipAddr = new int[4];
 
-            foreach (char c in input)
+            for (int i = 0; i < input.Length; i++)
             {
-                if (c == '.')
+                if (input[i] == '.')
                 {
+                    i++;
                     continue;
                 }
-
-                ipAddr.Append(int.Parse(input));
-#if DEBUG
-                Console.WriteLine($"ipAddr appended {int.Parse(input)}");
-#endif // DEBUG
             }
 
             if (input.ToLower() == "localhost")
@@ -245,13 +243,15 @@ namespace ChatTCP
                 // The client's local IP
                 // This is primarily for testing purposes when hosting
                 output = localHost;
+                ipAddr = localHost;
             }
             else
             {
                 // Output the resulting numbers
                 output = ipAddr;
             }
-            return false;
+            Console.WriteLine($"Output is {output}");
+            return ipAddr.Length < 4 ? false : true;
         }
 
         // Try to connect to the inputted IP address
@@ -262,6 +262,12 @@ namespace ChatTCP
             // Check every server in the list and if their ipAddr fits the inputted IP
             foreach (Server server in servers)
             {
+                // Skip over null servers
+                if (server == null)
+                {
+                    continue;
+                }
+
                 if (ipInput == server?.ipAddr)
                 {
                     foundServer = true;
@@ -274,12 +280,14 @@ namespace ChatTCP
                 // Show an info box saying that no server's been found
                 MessageBox.Show(
                     $"Couldn't find a server with the IP address of {ipInput}",
-                    "Info - Server",
+                    "Info - Connecting",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
+                return false;
             }
 
-            return foundServer;
+            // Server has been found!
+            return true;
         }
         #endregion // CONNECTION_HANDLERS
     }
