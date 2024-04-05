@@ -45,10 +45,10 @@
             // 
             this.ipConnect.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ipConnect.Enabled = false;
-            this.ipConnect.Location = new System.Drawing.Point(349, 169);
-            this.ipConnect.Margin = new System.Windows.Forms.Padding(2);
+            this.ipConnect.Location = new System.Drawing.Point(465, 208);
+            this.ipConnect.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ipConnect.Name = "ipConnect";
-            this.ipConnect.Size = new System.Drawing.Size(152, 34);
+            this.ipConnect.Size = new System.Drawing.Size(203, 42);
             this.ipConnect.TabIndex = 0;
             this.ipConnect.Text = "Connect to IP";
             this.ipConnect.UseVisualStyleBackColor = true;
@@ -60,32 +60,33 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(317, 113);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(423, 139);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(238, 13);
+            this.label1.Size = new System.Drawing.Size(291, 16);
             this.label1.TabIndex = 1;
             this.label1.Text = "Type the TCP/IP address you wish to connect to";
             // 
             // ipInput
             // 
-            this.ipInput.Location = new System.Drawing.Point(349, 136);
-            this.ipInput.Margin = new System.Windows.Forms.Padding(2);
+            this.ipInput.Location = new System.Drawing.Point(465, 167);
+            this.ipInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ipInput.Name = "ipInput";
-            this.ipInput.Size = new System.Drawing.Size(153, 20);
+            this.ipInput.Size = new System.Drawing.Size(203, 22);
             this.ipInput.TabIndex = 2;
             this.ipInput.Tag = "";
             this.ipInput.TextChanged += new System.EventHandler(this.IPInput_TextChanged);
+            this.ipInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IPInput_KeyPress);
             // 
             // hostInput
             // 
-            this.hostInput.Location = new System.Drawing.Point(615, 134);
-            this.hostInput.Margin = new System.Windows.Forms.Padding(2);
+            this.hostInput.Location = new System.Drawing.Point(820, 165);
+            this.hostInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.hostInput.Name = "hostInput";
-            this.hostInput.Size = new System.Drawing.Size(153, 20);
+            this.hostInput.Size = new System.Drawing.Size(203, 22);
             this.hostInput.TabIndex = 5;
             this.hostInput.Tag = "";
             this.hostInput.TextChanged += new System.EventHandler(this.HostInput_TextChanged);
+            this.hostInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HostInputs_KeyPress);
             // 
             // label2
             // 
@@ -93,10 +94,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(644, 111);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(859, 137);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(102, 13);
+            this.label2.Size = new System.Drawing.Size(126, 16);
             this.label2.TabIndex = 4;
             this.label2.Text = "Host on specified IP";
             // 
@@ -104,10 +104,10 @@
             // 
             this.hostButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.hostButton.Enabled = false;
-            this.hostButton.Location = new System.Drawing.Point(798, 223);
-            this.hostButton.Margin = new System.Windows.Forms.Padding(2);
+            this.hostButton.Location = new System.Drawing.Point(1064, 274);
+            this.hostButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.hostButton.Name = "hostButton";
-            this.hostButton.Size = new System.Drawing.Size(152, 34);
+            this.hostButton.Size = new System.Drawing.Size(203, 42);
             this.hostButton.TabIndex = 3;
             this.hostButton.Text = "Start hosting on specified IP";
             this.hostButton.UseVisualStyleBackColor = true;
@@ -115,13 +115,14 @@
             // 
             // maxUserInput
             // 
-            this.maxUserInput.Location = new System.Drawing.Point(615, 183);
-            this.maxUserInput.Margin = new System.Windows.Forms.Padding(2);
+            this.maxUserInput.Location = new System.Drawing.Point(820, 225);
+            this.maxUserInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.maxUserInput.Name = "maxUserInput";
-            this.maxUserInput.Size = new System.Drawing.Size(153, 20);
+            this.maxUserInput.Size = new System.Drawing.Size(203, 22);
             this.maxUserInput.TabIndex = 7;
             this.maxUserInput.Tag = "";
             this.maxUserInput.TextChanged += new System.EventHandler(this.MaxUsersInput_TextChanged);
+            this.maxUserInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HostInputs_KeyPress);
             // 
             // label3
             // 
@@ -129,22 +130,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(664, 165);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(885, 203);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 13);
+            this.label3.Size = new System.Drawing.Size(68, 16);
             this.label3.TabIndex = 6;
             this.label3.Text = "Max users";
             // 
             // serverNameInput
             // 
-            this.serverNameInput.Location = new System.Drawing.Point(798, 183);
-            this.serverNameInput.Margin = new System.Windows.Forms.Padding(2);
+            this.serverNameInput.Location = new System.Drawing.Point(1064, 225);
+            this.serverNameInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.serverNameInput.Name = "serverNameInput";
-            this.serverNameInput.Size = new System.Drawing.Size(153, 20);
+            this.serverNameInput.Size = new System.Drawing.Size(203, 22);
             this.serverNameInput.TabIndex = 9;
             this.serverNameInput.Tag = "";
-            this.serverNameInput.TextChanged += new System.EventHandler(this.serverNameInput_TextChanged);
+            this.serverNameInput.TextChanged += new System.EventHandler(this.ServerNameInput_TextChanged);
+            this.serverNameInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HostInputs_KeyPress);
             // 
             // label4
             // 
@@ -152,19 +153,18 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(840, 165);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Location = new System.Drawing.Point(1120, 203);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 13);
+            this.label4.Size = new System.Drawing.Size(84, 16);
             this.label4.TabIndex = 8;
             this.label4.Text = "Server name";
             // 
             // Client
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1280, 720);
+            this.ClientSize = new System.Drawing.Size(1707, 886);
             this.Controls.Add(this.serverNameInput);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.maxUserInput);
@@ -176,7 +176,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ipConnect);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Client";
             this.Text = "ChatTCP";
             this.ResumeLayout(false);

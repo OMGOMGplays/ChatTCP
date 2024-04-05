@@ -15,7 +15,8 @@ namespace ChatTCP
     internal partial class Client : Form
     {
         // Constant variables
-        public const int MAX_IP_LEN = 25;
+        public const int MAX_IP_LEN = 25; // Max length of the IP address
+        public const string LOCALHOST = "127001"; // Local client's IP address
 
         // Servers
         public Server[] servers = new Server[2048]; // Arbitrary amount
@@ -24,7 +25,6 @@ namespace ChatTCP
         public User localUser;
 
         // Hosting
-        public bool hostingServer;
         public int serverMaxUsers;
         public string serverName;
         public string serverIP;
@@ -33,21 +33,11 @@ namespace ChatTCP
         public Client()
         {
             InitializeComponent();
+
+            localUser = new User();
         }
 
-        #region INPUT
-        private void IPConnect_Click(object sender, EventArgs e)
-        {
-            if (IsValidIP(ipInput.Text, out string output))
-            {
-                TryConnect(output);
-
-#if DEBUG
-                Console.WriteLine($"Attempting to connect to IP address {output}...");
-#endif // DEBUG
-            }
-        }
-
+        #region CONNECT
         private void IPInput_TextChanged(object sender, EventArgs e)
         {
             // Make sure the input doesn't exceed the allowed length
@@ -68,6 +58,41 @@ namespace ChatTCP
             }
         }
 
+        private void IPInput_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Effectively click the connect button when enter is pressed
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                IPConnect_Click(this, null);
+            }
+        }
+
+        private void IPConnect_Click(object sender, EventArgs e)
+        {
+            if (IsValidIP(ipInput.Text, out string output))
+            {
+                // Can't connect to localhost, cause of obvious reasons
+                if (output == LOCALHOST)
+                {
+                    // Display an error pop-up describing what's wrong
+                    MessageBox.Show(
+                        "Can't connect to localhost, that is your client!",
+                        "Error - localhost",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    return;
+                }
+
+                TryConnect(output);
+
+#if DEBUG
+                Console.WriteLine($"Attempting to connect to IP address {output}...");
+#endif // DEBUG
+            }
+        }
+        #endregion // CONNECT
+
+        #region HOST
         private void HostInput_TextChanged(object sender, EventArgs e)
         {
             // Check if the IP is valid, if so, have the button be enabled
@@ -104,7 +129,7 @@ namespace ChatTCP
             }
         }
 
-        private void serverNameInput_TextChanged(object sender, EventArgs e)
+        private void ServerNameInput_TextChanged(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(serverNameInput.Text))
             {
@@ -116,47 +141,62 @@ namespace ChatTCP
             }
         }
 
+        // Handle the user pressing Enter on any of the valid inputs
+        private void HostInputs_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                HostButton_Click(this, null);
+            }
+        }
+
+        // Start hosting a server with the info gathered from above
         private void HostButton_Click(object sender, EventArgs e)
         {
             // Show an error if the serverMaxUsers is 0
             if (serverMaxUsers == 0)
             {
-                MessageBox.Show("Please input a valid max user amount!\nThe range is from 1 to 60 users.", "Error - maxUsers", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Display a pop-up showing the error
+                MessageBox.Show(
+                    $"Please input a valid max user amount!\nThe range is from 1 to {Server.MAX_USERS} users.",
+                    "Error - maxUsers",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
             }
 
             if (IsValidIP(hostInput.Text, out string output))
             {
-                hostingServer = true; // Don't allow the client to join another server while hosting
-                hostedServer = new Server(serverMaxUsers, serverName, serverIP); // Make the server and fill its variables
+                // Make the server and fill its variables
+                hostedServer = new Server(serverMaxUsers, serverName, serverIP, localUser);
                 servers.Append(hostedServer);
 
 #if DEBUG
                 // Write the info of the new server
                 Console.WriteLine($"Making a new server...\n" +
-                    $"  serverIP : {serverIP}\n" +
-                    $"  serverMaxUsers : {serverMaxUsers}\n" +
-                    $"  serverName : {serverName}");
+                    $"  serverIP : {hostedServer.ipAddr}\n" +
+                    $"  serverMaxUsers : {hostedServer.maxUsers}\n" +
+                    $"  serverName : {hostedServer.serverName}");
 #endif // DEBUG
             }
         }
-        #endregion // INPUT
+        #endregion // HOST
 
         #region CONNECTION_HANDLERS
-        /// <summary>
-        /// Is the input a valid IP address?
-        /// </summary>
+        // Method to check if the input is an IP address, and outputs the resulting IP
         private bool IsValidIP(string input, out string output)
         {
             // Array of valid numbers, concat'd to one string to check if a valid int
+            // Potentially change to a regex
             char[] validNums = new char[MAX_IP_LEN];
 
             // For each character in the input
             for (int i = 0; i < input.Length; i++)
             {
-                // Skip the .'s in e.g. "192.168.0.1"
+                // Skip the .'s in the IP address
                 if (input[i] == '.')
                 {
-                    validNums[i] = '\0';
+                    validNums[i] = validNums[i - 1];
                     continue;
                 }
                 else // Otherwise, the input is (presumably) a number
@@ -168,7 +208,8 @@ namespace ChatTCP
             if (input == "localhost")
             {
                 // The client's local IP
-                output = "127001";
+                // This is primarily for testing purposes when hosting
+                output = LOCALHOST;
             }
             else
             {
@@ -179,9 +220,31 @@ namespace ChatTCP
             return int.TryParse(output, out int result);
         }
 
-        private bool TryConnect(string ip)
+        // Try to connect to the inputted IP address
+        private bool TryConnect(string ipInput)
         {
-            return ip == null ? false : true;
+            bool foundServer = false;
+
+            // Check every server in the list, if their ipAddr fits the inputted IP
+            foreach (Server server in servers)
+            {
+                if (ipInput == server?.ipAddr)
+                {
+                    foundServer = true;
+                }
+            }
+
+            if (!foundServer)
+            {
+                // Show an info box saying that no server's been found
+                MessageBox.Show(
+                    $"Couldn't find a server with the IP address of {ipInput}",
+                    "Server Info",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+            }
+
+            return foundServer;
         }
         #endregion // CONNECTION_HANDLERS
     }
