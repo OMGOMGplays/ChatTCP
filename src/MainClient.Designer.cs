@@ -1,6 +1,6 @@
 ﻿namespace ChatTCP
 {
-    partial class Client
+    partial class MainClient
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Client));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainClient));
             this.ipConnect = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.ipInput = new System.Windows.Forms.TextBox();
@@ -39,6 +39,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.serverNameInput = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.usernameInput = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ipConnect
@@ -159,12 +161,36 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "Server name";
             // 
-            // Client
+            // usernameInput
+            // 
+            this.usernameInput.Location = new System.Drawing.Point(465, 428);
+            this.usernameInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.usernameInput.Name = "usernameInput";
+            this.usernameInput.Size = new System.Drawing.Size(203, 22);
+            this.usernameInput.TabIndex = 11;
+            this.usernameInput.Tag = "";
+            this.usernameInput.TextChanged += new System.EventHandler(this.UsernameInput_TextChanged);
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(491, 400);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(144, 16);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Type in your username";
+            // 
+            // MainClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1707, 886);
+            this.Controls.Add(this.usernameInput);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.serverNameInput);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.maxUserInput);
@@ -177,7 +203,7 @@
             this.Controls.Add(this.ipConnect);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "Client";
+            this.Name = "MainClient";
             this.Text = "ChatTCP";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -196,6 +222,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox serverNameInput;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox usernameInput;
+        private System.Windows.Forms.Label label5;
     }
 }
 

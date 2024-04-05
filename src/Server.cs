@@ -11,22 +11,22 @@ namespace ChatTCP
         public const int MAX_USERS = 64;
 
         public int maxUsers = 4;
+        public int[] ipAddr;
         public string serverName;
-        public string ipAddr;
         public User[] users = new User[MAX_USERS];
 
-        public Server(int maxUsers, string serverName, string ipAddr, User user)
+        public Server(int maxUsers, int[] ipAddr, string serverName)
         {
             this.maxUsers = maxUsers;
-            this.serverName = serverName;
             this.ipAddr = ipAddr;
-            users.Append(user);
+            this.serverName = serverName;
         }
 
         public void JoinServer(User newUser)
         {
             newUser.currServer = this;
             users.Append(newUser);
+            Console.WriteLine($"User {newUser.username} has joined the server.");
         }
     }
 }

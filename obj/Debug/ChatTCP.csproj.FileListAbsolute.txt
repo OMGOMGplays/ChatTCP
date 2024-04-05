@@ -5,7 +5,6 @@ C:\Users\Loke.Vigstrand\Skolprojekt\VS22\ChatTCP\obj\Debug\ChatTCP.csproj.CoreCo
 C:\Users\Loke.Vigstrand\Skolprojekt\VS22\ChatTCP\bin\Debug\ChatTCP.exe.config
 C:\Users\Loke.Vigstrand\Skolprojekt\VS22\ChatTCP\bin\Debug\ChatTCP.exe
 C:\Users\Loke.Vigstrand\Skolprojekt\VS22\ChatTCP\bin\Debug\ChatTCP.pdb
-C:\Users\Loke.Vigstrand\Skolprojekt\VS22\ChatTCP\obj\Debug\ChatTCP.Client.resources
 C:\Users\Loke.Vigstrand\Skolprojekt\VS22\ChatTCP\obj\Debug\ChatTCP.exe
 C:\Users\Loke.Vigstrand\Skolprojekt\VS22\ChatTCP\obj\Debug\ChatTCP.pdb
 C:\Users\Loke\source\repos\ChatTCP\bin\Debug\ChatTCP.exe.config
@@ -18,3 +17,4 @@ C:\Users\Loke\source\repos\ChatTCP\obj\Debug\ChatTCP.csproj.GenerateResource.cac
 C:\Users\Loke\source\repos\ChatTCP\obj\Debug\ChatTCP.csproj.CoreCompileInputs.cache
 C:\Users\Loke\source\repos\ChatTCP\obj\Debug\ChatTCP.exe
 C:\Users\Loke\source\repos\ChatTCP\obj\Debug\ChatTCP.pdb
+C:\Users\Loke.Vigstrand\Skolprojekt\VS22\ChatTCP\obj\Debug\ChatTCP.MainClient.resources
