@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,44 +12,58 @@ namespace ChatTCP
     {
         public const int MAX_USERS = 64;
 
+        private TcpListener tcpListener;
+        private IPEndPoint ipEndPoint;
+
         public int maxUsers;
         public string ipAddr;
         public string serverName;
         public User[] users = new User[MAX_USERS];
+        public bool running;
 
         public Server(int maxUsers, string ipAddr, string serverName)
         {
             this.maxUsers = maxUsers;
             this.ipAddr = ipAddr;
             this.serverName = serverName;
+
+            MakeServer();
+
+            running = true;
         }
 
-        public void JoinServer(User newUser)
+        public void MakeServer()
         {
-            // Half baked attempt to not allow more than maxUsers amount of users in one server
-            //int i;
+            IPAddress ipAddress = IPAddress.Parse(ipAddr);
+            ipEndPoint = new IPEndPoint(ipAddress, 27015);
+            tcpListener = new TcpListener(ipEndPoint);
 
-            //for (i = 0; i < users.Length;)
-            //{
-            //    if (users?[i] == null)
-            //    {
-            //        i--;
-            //    }
-            //    else
-            //    {
-            //        i = Math.Abs(i) + 1;
-            //    }
-            //}
+            tcpListener.Start(maxUsers);
+        }
 
-            //if (i >= maxUsers)
-            //{
-            //    Console.WriteLine($"User \"{newUser.username}\" tried to join the server, but it is filled!");
-            //    return;
-            //}
+        public async void JoinServer(User user)
+        {
+            try
+            {
+                while (running)
+                {
+                    TcpClient client = await tcpListener.AcceptTcpClientAsync();
+                }
+            }
+            catch (SocketException)
+            {
+                throw;
+            }
 
-            newUser.currServer = this;
-            users.Append(newUser);
-            Console.WriteLine($"User \"{newUser.username}\" has joined the server.");
+            user.currServer = this;
+            users.Append(user);
+            Console.WriteLine($"User \"{user.username}\" has joined the server.");
+        }
+
+        public void CloseServer()
+        {
+            tcpListener.Stop();
+            running = false;
         }
     }
 }

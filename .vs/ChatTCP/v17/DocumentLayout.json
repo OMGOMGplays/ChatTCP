@@ -7,24 +7,24 @@
       "RelativeMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|solutionrelative:src\\mainclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\src\\mainclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|solutionrelative:src\\mainclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\src\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|solutionrelative:src\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\src\\mainclient.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|solutionrelative:src\\mainclient.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\src\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|solutionrelative:src\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\src\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|solutionrelative:src\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\src\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|solutionrelative:src\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\src\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|solutionrelative:src\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\src\\mainclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{5595A24A-A47F-4982-B96B-BDE10D6A92FE}|ChatTCP.csproj|solutionrelative:src\\mainclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +38,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "MainClient.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\src\\MainClient.cs",
               "RelativeDocumentMoniker": "src\\MainClient.cs",
@@ -56,7 +56,7 @@
               "RelativeDocumentMoniker": "src\\MainClient.cs",
               "ToolTip": "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\src\\MainClient.cs",
               "RelativeToolTip": "src\\MainClient.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABgAAABKAAAA",
+              "ViewState": "AQIAAB8BAAAAAAAAAAAIwC8BAABIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-04T11:37:53.711Z",
               "EditorCaption": ""
@@ -69,21 +69,23 @@
               "RelativeDocumentMoniker": "src\\Server.cs",
               "ToolTip": "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\src\\Server.cs",
               "RelativeToolTip": "src\\Server.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAkwCUAAAAnAAAA",
+              "ViewState": "AQIAABkAAAAAAAAAAAAgwCgAAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-04T11:57:28.464Z"
+              "WhenOpened": "2024-04-04T11:57:28.464Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\src\\User.cs",
               "RelativeDocumentMoniker": "src\\User.cs",
               "ToolTip": "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\src\\User.cs",
               "RelativeToolTip": "src\\User.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAUAAAA",
+              "ViewState": "AQIAAAQAAAAAAAAAAIAwwBEAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-04T11:57:48.729Z"
+              "WhenOpened": "2024-04-04T11:57:48.729Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -95,11 +97,12 @@
               "RelativeToolTip": "src\\MainClient.Designer.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-04T11:35:25.862Z"
+              "WhenOpened": "2024-04-04T11:35:25.862Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\src\\Program.cs",
               "RelativeDocumentMoniker": "src\\Program.cs",
@@ -107,7 +110,8 @@
               "RelativeToolTip": "src\\Program.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-04T11:35:22.657Z"
+              "WhenOpened": "2024-04-04T11:35:22.657Z",
+              "EditorCaption": ""
             }
           ]
         }

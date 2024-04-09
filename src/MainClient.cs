@@ -25,7 +25,7 @@ namespace ChatTCP
         public const string IP_PATTERN = @"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$";
 
         // Servers
-        private Server[] servers = new Server[32]; // Arbitrary amount
+        private Server[] servers = new Server[2048]; // Arbitrary amount
 
         // Local
         private User localUser;
@@ -268,7 +268,6 @@ namespace ChatTCP
             Match match = regex.Match(input);
 
             output = match.Value;
-            Console.WriteLine($"output = {output}");
             // Returns true if the match has succeeded
             return match.Success;
         }
@@ -278,33 +277,47 @@ namespace ChatTCP
         {
             bool foundServer = false;
 
-            // Check every server in the list and if their ipAddr fits the inputted IP
-            foreach (Server server in servers)
-            {
-                // Skip over null servers
-                if (server == null)
-                {
-                    continue;
-                }
+            localUser.client = new TcpClient();
 
-                if (ipInput == server?.ipAddr)
-                {
-                    foundServer = true;
-                    server.JoinServer(localUser);
-                }
+            // Check every server in the list and if their ipAddr fits the inputted IP
+            //foreach (Server server in servers)
+            //{
+            // Skip over null servers
+            //    if (server == null)
+            //    {
+            //        continue;
+            //    }
+
+            //    if (ipInput == server?.ipAddr)
+            //    {
+            //        server.JoinServer(localUser.client);
+            //    }
+            //}
+
+            try
+            {
+                localUser.client.Connect(ipInput, 27015);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(
+                    $"Couldn't connect to \"{ipInput}\" ({e.Message}).",
+                    "Info - Connecting",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
             }
 
             if (!foundServer)
             {
                 // Show an info box saying that no server's been found
                 MessageBox.Show(
-                    $"Couldn't find a server with the IP address of {ipInput}",
+                    $"Couldn't find a server with the IP address of \"{ipInput}\"",
                     "Info - Connecting",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
             }
 
-            // Server has been found!
+            // Return whatever foundServer is
             return foundServer;
         }
         #endregion // CONNECTION_HANDLERS
