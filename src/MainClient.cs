@@ -19,10 +19,10 @@ namespace ChatTCP
         public const int MAX_IP_LEN = 32; // Max length of the IP address
         public static string LOCALHOST = "127.0.0.1"; // Local client's IP address
 
-        // Sourced from
+        // Sourced from:
         // https://www.oreilly.com/library/view/regular-expressions-cookbook/9780596802837/ch07s16.html
-        // Is to be used to describe whether or not an input is a valid IP address or not, through a Regex check
-        public const string IP_PATTERN = @"^([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})$";
+        // Is to be used to determine whether or not an input is a valid IP address or not, through a Regex check
+        public const string IP_PATTERN = @"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$";
 
         // Servers
         private Server[] servers = new Server[32]; // Arbitrary amount
@@ -282,10 +282,10 @@ namespace ChatTCP
             foreach (Server server in servers)
             {
                 // Skip over null servers
-                //if (server == null)
-                //{
-                //    continue;
-                //}
+                if (server == null)
+                {
+                    continue;
+                }
 
                 if (ipInput == server?.ipAddr)
                 {
