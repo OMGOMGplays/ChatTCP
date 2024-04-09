@@ -205,6 +205,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainClient";
             this.Text = "ChatTCP";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainClient_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

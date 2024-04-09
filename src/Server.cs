@@ -32,6 +32,7 @@ namespace ChatTCP
             running = true;
         }
 
+        // Initialize the server
         public void MakeServer()
         {
             IPAddress ipAddress = IPAddress.Parse(ipAddr);
@@ -41,6 +42,7 @@ namespace ChatTCP
             tcpListener.Start(maxUsers);
         }
 
+        // Have the input User join the server
         public async void JoinServer(User user)
         {
             try
@@ -60,6 +62,7 @@ namespace ChatTCP
             Console.WriteLine($"User \"{user.username}\" has joined the server.");
         }
 
+        // Close the server
         public void CloseServer()
         {
             tcpListener.Stop();

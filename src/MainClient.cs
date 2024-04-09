@@ -305,6 +305,7 @@ namespace ChatTCP
                     "Info - Connecting",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
+                return false;
             }
 
             if (!foundServer)
@@ -319,6 +320,23 @@ namespace ChatTCP
 
             // Return whatever foundServer is
             return foundServer;
+        }
+
+        // Close the hosted server, when the form is closing
+        private void MainClient_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (hostedServer != null)
+            {
+                hostedServer.CloseServer();
+                
+                for (int i = 0; i < servers.Length; i++)
+                {
+                    if (servers[i] == hostedServer)
+                    {
+                        servers[i] = null;
+                    }
+                }
+            }
         }
         #endregion // CONNECTION_HANDLERS
     }
