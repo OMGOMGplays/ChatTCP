@@ -11,13 +11,14 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+#pragma warning disable CA1416 // Disable annoying squiggly lines informing about old Windows support
+
 namespace ChatTCP
 {
     internal partial class MainClient : Form
     {
         // Constant variables
-        public const int MAX_IP_LEN = 32; // Max length of the IP address
-        public static string LOCALHOST = "127.0.0.1"; // Local client's IP address
+        public const int MAX_IP_LEN = 32; // Max length of an IP address
 
         // Sourced from:
         // https://www.oreilly.com/library/view/regular-expressions-cookbook/9780596802837/ch07s16.html
@@ -41,11 +42,13 @@ namespace ChatTCP
             InitializeComponent();
 
             localUser = new User();
+            localUser.socket = new Socket(SocketType.Stream, ProtocolType.Tcp);
         }
 
         #region USER
         private void UsernameInput_TextChanged(object sender, EventArgs e)
         {
+            // Can't have a username that's too long
             if (usernameInput.Text.Length > User.MAX_USERNAME_LEN)
             {
                 MessageBox.Show(
@@ -53,14 +56,15 @@ namespace ChatTCP
                     "Error - User",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
-                usernameInput.MaxLength = User.MAX_USERNAME_LEN + 1;
+                usernameInput.MaxLength = User.MAX_USERNAME_LEN;
             }
 
+            // Set the local user's username to the input
             localUser.username = usernameInput.Text;
         }
         #endregion // USER
 
-        #region CONNECT
+        #region CONNECTING
         private void IPInput_TextChanged(object sender, EventArgs e)
         {
             // Make sure the input doesn't exceed the allowed length
@@ -94,18 +98,6 @@ namespace ChatTCP
         {
             if (IsValidIP(ipInput.Text, out string output))
             {
-                // Can't connect to localhost, cause of obvious reasons
-                if (output == LOCALHOST)
-                {
-                    // Display an error pop-up describing what's wrong
-                    MessageBox.Show(
-                        "Can't connect to localhost, that's your client!",
-                        "Error - Connecting",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    return;
-                }
-
                 // Make a random username for those without a specified username
                 if (string.IsNullOrEmpty(localUser.username))
                 {
@@ -123,7 +115,7 @@ namespace ChatTCP
 #endif // DEBUG
             }
         }
-        #endregion // CONNECT
+        #endregion // CONNECTING
 
         #region HOST
         private void HostInput_TextChanged(object sender, EventArgs e)
@@ -162,6 +154,7 @@ namespace ChatTCP
             }
         }
 
+        // Change the server's name
         private void ServerNameInput_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(serverNameInput.Text))
@@ -186,8 +179,8 @@ namespace ChatTCP
         // Start hosting a server with the info gathered from above
         private void HostButton_Click(object sender, EventArgs e)
         {
-            // Show an error if the serverMaxUsers is 0
-            if (serverMaxUsers == 0)
+            // Show an error if the serverMaxUsers is less than or equal to 0
+            if (serverMaxUsers <= 0)
             {
                 // Display a pop-up showing the error
                 MessageBox.Show(
@@ -198,6 +191,7 @@ namespace ChatTCP
                 return;
             }
 
+            // Make sure the input is a valid IP address
             if (IsValidIP(hostInput.Text, out string output))
             {
                 // Make a random username for those without a specified username
@@ -213,7 +207,7 @@ namespace ChatTCP
                 // Make the server and fill its variables
                 hostedServer = new Server(serverMaxUsers, serverIP, serverName);
 
-                // Add the hosted server to the server list and tries to have the localUser join the server
+                // Add the hosted server to the server list and try to have the localUser join the server
                 for (int i = 0; i < servers.Length; i++)
                 {
                     if (servers[i] == null)
@@ -221,30 +215,29 @@ namespace ChatTCP
                         servers[i] = hostedServer;
                         break;
                     }
-                    else
-                    {
-                        continue;
-                    }
                 }
 
                 // If we can't connect, then remove the server
                 if (!TryConnect(serverIP))
                 {
+                    // Inform the user that the server couldn't be locally connected to
                     MessageBox.Show(
                         "Couldn't personally connect to server, please retry!",
                         "Error - Server",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
 
-                    hostedServer = null;
                     // Remove the server from the list
                     for (int i = 0; i < servers.Length - 1; i++)
                     {
                         if (hostedServer == servers[i])
                         {
                             servers[i] = null;
+                            hostedServer = null;
+                            break;
                         }
                     }
+
                     return;
                 }
 
@@ -268,8 +261,7 @@ namespace ChatTCP
             Match match = regex.Match(input);
 
             output = match.Value;
-            // Returns true if the match has succeeded
-            return match.Success;
+            return match.Success; // Returns the result, whether it's a valid IP address or not
         }
 
         // Try to connect to the inputted IP address
@@ -277,35 +269,23 @@ namespace ChatTCP
         {
             bool foundServer = false;
 
-            localUser.client = new TcpClient();
-
             // Check every server in the list and if their ipAddr fits the inputted IP
-            //foreach (Server server in servers)
-            //{
-            // Skip over null servers
-            //    if (server == null)
-            //    {
-            //        continue;
-            //    }
-
-            //    if (ipInput == server?.ipAddr)
-            //    {
-            //        server.JoinServer(localUser.client);
-            //    }
-            //}
-
-            try
+            foreach (Server server in servers)
             {
-                localUser.client.Connect(ipInput, 27015);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(
-                    $"Couldn't connect to \"{ipInput}\" ({e.Message}).",
-                    "Info - Connecting",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-                return false;
+                // Skip over null servers
+                if (server == null)
+                {
+                    continue;
+                }
+
+                if (ipInput == server?.ipAddr)
+                {
+                    // The client has found a server
+                    foundServer = true;
+
+                    // Connect the user to the server
+                    localUser.socket.BeginConnect(ipInput, 1, null, null);
+                }
             }
 
             if (!foundServer)
@@ -318,7 +298,7 @@ namespace ChatTCP
                     MessageBoxIcon.Warning);
             }
 
-            // Return whatever foundServer is
+            // Return foundServer's value
             return foundServer;
         }
 
@@ -328,7 +308,7 @@ namespace ChatTCP
             if (hostedServer != null)
             {
                 hostedServer.CloseServer();
-                
+
                 for (int i = 0; i < servers.Length; i++)
                 {
                     if (servers[i] == hostedServer)

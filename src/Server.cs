@@ -10,16 +10,17 @@ namespace ChatTCP
 {
     internal class Server
     {
+        // Default amount of max users in a server
         public const int MAX_USERS = 64;
 
-        private TcpListener tcpListener;
-        private IPEndPoint ipEndPoint;
-
+        // Server stuffs
         public int maxUsers;
         public string ipAddr;
         public string serverName;
         public User[] users = new User[MAX_USERS];
-        public bool running;
+
+        // Network stuffs
+        Socket socket;
 
         public Server(int maxUsers, string ipAddr, string serverName)
         {
@@ -27,46 +28,38 @@ namespace ChatTCP
             this.ipAddr = ipAddr;
             this.serverName = serverName;
 
+            // Make the server properly
             MakeServer();
-
-            running = true;
         }
 
         // Initialize the server
         public void MakeServer()
         {
-            IPAddress ipAddress = IPAddress.Parse(ipAddr);
-            ipEndPoint = new IPEndPoint(ipAddress, 27015);
-            tcpListener = new TcpListener(ipEndPoint);
+            // Create the socket
+            socket = new Socket(SocketType.Stream, ProtocolType.Tcp);
 
-            tcpListener.Start(maxUsers);
-        }
+            // Bind the socket to the IP address
+            socket.Bind(new IPEndPoint(IPAddress.Parse(ipAddr), 0));
 
-        // Have the input User join the server
-        public async void JoinServer(User user)
-        {
-            try
-            {
-                while (running)
-                {
-                    TcpClient client = await tcpListener.AcceptTcpClientAsync();
-                }
-            }
-            catch (SocketException)
-            {
-                throw;
-            }
-
-            user.currServer = this;
-            users.Append(user);
-            Console.WriteLine($"User \"{user.username}\" has joined the server.");
+            // Start listening for connections
+            socket.Listen();
         }
 
         // Close the server
         public void CloseServer()
         {
-            tcpListener.Stop();
-            running = false;
+            // Close the socket
+            socket.Close();
+            socket.Shutdown(SocketShutdown.Both);
+            socket = null;
+        }
+
+        // Have the input User join the server
+        public void JoinServer(User user)
+        {
+            user.currServer = this;
+            users.Append(user);
+            Console.WriteLine($"User \"{user.username}\" has joined the server.");
         }
     }
 }
