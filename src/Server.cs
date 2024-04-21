@@ -19,7 +19,7 @@ namespace ChatTCP
 
         // Server stuffs
         public int maxUsers;
-        public string ipAddr;
+        public IPAddress ipAddr;
         public string serverName;
         public User[] users = new User[MAX_USERS];
 
@@ -29,7 +29,7 @@ namespace ChatTCP
         // Network stuffs
         TcpListener listener;
 
-        public Server(int maxUsers, string ipAddr, string serverName)
+        public Server(int maxUsers, IPAddress ipAddr, string serverName)
         {
             this.maxUsers = maxUsers;
             this.ipAddr = ipAddr;
