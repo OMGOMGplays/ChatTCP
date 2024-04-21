@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
@@ -42,7 +43,8 @@ namespace ChatTCP
             InitializeComponent();
 
             localUser = new User();
-            localUser.socket = new Socket(SocketType.Stream, ProtocolType.Tcp);
+            //localUser.socket = new Socket(SocketType.Stream, ProtocolType.Tcp);
+            localUser.client = new TcpClient();
         }
 
         #region USER
@@ -217,6 +219,24 @@ namespace ChatTCP
                     }
                 }
 
+                // Display a text box to show the server's activity
+                MessageBox.Show(
+                    "Server has been successfully made! Its values are:\n" +
+                    $"serverIP: {hostedServer.ipAddr}\n" +
+                    $"serverMaxUsers: {hostedServer.maxUsers}\n" +
+                    $"serverName: {hostedServer.serverName}",
+                    "Info - Server",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+//#if DEBUG
+//                // Write the info of the new server
+//                Console.WriteLine($"Making a new server...\n" +
+//                    $"  serverIP : {hostedServer.ipAddr}\n" +
+//                    $"  serverMaxUsers : {hostedServer.maxUsers}\n" +
+//                    $"  serverName : {hostedServer.serverName}");
+//#endif // DEBUG
+
                 // If we can't connect, then remove the server
                 if (!TryConnect(serverIP))
                 {
@@ -228,7 +248,7 @@ namespace ChatTCP
                         MessageBoxIcon.Error);
 
                     // Remove the server from the list
-                    for (int i = 0; i < servers.Length - 1; i++)
+                    for (int i = 0; i < servers.Length; i++)
                     {
                         if (hostedServer == servers[i])
                         {
@@ -238,16 +258,12 @@ namespace ChatTCP
                         }
                     }
 
+#if DEBUG
+                    Console.WriteLine("Attempt at hosting server has gone awry!");
+#endif // DEBUG
+
                     return;
                 }
-
-#if DEBUG
-                // Write the info of the new server
-                Console.WriteLine($"Making a new server...\n" +
-                    $"  serverIP : {hostedServer.ipAddr}\n" +
-                    $"  serverMaxUsers : {hostedServer.maxUsers}\n" +
-                    $"  serverName : {hostedServer.serverName}");
-#endif // DEBUG
             }
         }
         #endregion // HOST
@@ -284,7 +300,8 @@ namespace ChatTCP
                     foundServer = true;
 
                     // Connect the user to the server
-                    localUser.socket.BeginConnect(ipInput, 1, null, null);
+                    //localUser.socket.BeginConnect(ipInput, 8001, null, null);
+                    localUser.client.Connect(IPAddress.Parse(ipInput), 8000);
                 }
             }
 

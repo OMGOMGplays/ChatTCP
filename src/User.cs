@@ -14,6 +14,8 @@ namespace ChatTCP
 
         public Socket socket; // The user's network socket, used to connect to a server socket
 
+        public TcpClient client;
+
         public string username; // The user's username, displays when chatting
         public string msg; // The user's message (in a sort of buffer)
         public Server currServer; // The current server that the user's in, if any

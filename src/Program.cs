@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+#pragma warning disable CA1416 // Disable annoying squiggly lines informing about old Windows support
+
 namespace ChatTCP
 {
     internal static class Program
