@@ -34,7 +34,7 @@ namespace ChatTCP
 
         // Hosting
         private int serverMaxUsers;
-        private IPAddress serverIP;
+        private string serverIP;
         private string serverName;
         private Server hostedServer;
 
@@ -77,7 +77,7 @@ namespace ChatTCP
             }
 
             // Check if the IP is valid, if so, have the button be enabled
-            if (IsValidIP(ipInput.Text, out IPAddress output))
+            if (IsValidIP(ipInput.Text, out string output))
             {
                 ipConnect.Enabled = true;
             }
@@ -98,7 +98,7 @@ namespace ChatTCP
 
         private void IPConnect_Click(object sender, EventArgs e)
         {
-            if (IsValidIP(ipInput.Text, out IPAddress output))
+            if (IsValidIP(ipInput.Text, out string output))
             {
                 // Make a random username for those without a specified username
                 if (string.IsNullOrEmpty(localUser.username))
@@ -123,7 +123,7 @@ namespace ChatTCP
         private void HostInput_TextChanged(object sender, EventArgs e)
         {
             // Check if the IP is valid, if so, have the button be enabled
-            if (IsValidIP(hostInput.Text, out IPAddress output))
+            if (IsValidIP(hostInput.Text, out string output))
             {
                 hostButton.Enabled = true;
                 serverIP = output; // Set the server's IP address
@@ -194,7 +194,7 @@ namespace ChatTCP
             }
 
             // Make sure the input is a valid IP address
-            if (IsValidIP(hostInput.Text, out IPAddress output))
+            if (IsValidIP(hostInput.Text, out string output))
             {
                 // Make a random username for those without a specified username
                 if (string.IsNullOrEmpty(localUser.username))
@@ -270,18 +270,18 @@ namespace ChatTCP
 
         #region CONNECTION_HANDLERS
         // Method to check if the input is an IP address, and outputs the resulting IP
-        private bool IsValidIP(string input, out IPAddress output)
+        private bool IsValidIP(string input, out string output)
         {
             // Regex to see if the input fits the IP pattern
             Regex regex = new Regex(IP_PATTERN);
             Match match = regex.Match(input);
 
-            output = IPAddress.Parse(input);
+            output = match.Value;
             return match.Success; // Returns the result, whether it's a valid IP address or not
         }
 
         // Try to connect to the inputted IP address
-        private bool TryConnect(IPAddress ipAddr)
+        private bool TryConnect(string ipInput)
         {
             bool foundServer = false;
 
@@ -294,14 +294,14 @@ namespace ChatTCP
                     continue;
                 }
 
-                if (ipAddr == server?.ipAddr)
+                if (ipInput == server?.ipAddr)
                 {
                     // The client has found a server
                     foundServer = true;
 
                     // Connect the user to the server
                     //localUser.socket.BeginConnect(ipInput, 8001, null, null);
-                    localUser.client.Connect(ipAddr, 8000);
+                    localUser.client.Connect(IPAddress.Parse(ipInput), 8000);
                 }
             }
 
@@ -309,7 +309,7 @@ namespace ChatTCP
             {
                 // Show an info box saying that no server's been found
                 MessageBox.Show(
-                    $"Couldn't find a server with the IP address of \"{ipAddr}\"",
+                    $"Couldn't find a server with the IP address of \"{ipInput}\"",
                     "Info - Connecting",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
