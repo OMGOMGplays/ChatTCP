@@ -54,7 +54,7 @@ namespace ChatTCP
                 return;
             }
 
-            listener = new TcpListener(IPAddress.Any, 27015);
+            listener = new TcpListener(IPAddress.Any, 27014);
             listener.Start();
 
             serverRunning = true;

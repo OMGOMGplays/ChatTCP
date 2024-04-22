@@ -9,6 +9,7 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -50,7 +51,26 @@ namespace ChatTCP
             //localUser.socket = new Socket(SocketType.Stream, ProtocolType.Tcp);
             localUser.client = new TcpClient();
 
+            // Make a new local client and connect to the main ChatTCP-Host server
             localClient = new TcpClient();
+            ConnectClientToHostServer();
+        }
+
+        async void ConnectClientToHostServer()
+        {
+            try
+            {
+                await localClient.ConnectAsync(IPAddress.Parse("127.0.0.1"), 27015);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(
+                    $"Error connecting to ChatTCP-Host server!\n({e.Message})",
+                    "Error - Client",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                Close();
+            }
         }
 
         #region USER
@@ -317,7 +337,7 @@ namespace ChatTCP
                     }
 
                     // Connect the user to the server
-                    localUser.client.Connect(IPAddress.Parse(ipInput), 27015);
+                    localUser.client.Connect(IPAddress.Parse(ipInput), 27014);
                     localUser.currServer = server;
                     server.AppendServerOutputText($"<Server>: User \"{localUser.username}\" has joined the server!");
                 }
@@ -344,6 +364,7 @@ namespace ChatTCP
             if (localUser.currServer != null)
             {
                 localUser.currServer.AppendServerOutputText($"<Server>: User \"{localUser.username}\" has left the server!");
+                Thread.Sleep(2500);
             }
 
             if (hostedServer != null)
