@@ -1,0 +1,14 @@
+C:\Users\Loke\source\repos\ChatTCP\ChatTCP-Host\obj\Debug\net8.0-windows\ChatTCP-Host.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Loke\source\repos\ChatTCP\ChatTCP-Host\obj\Debug\net8.0-windows\ChatTCP-Host.csproj.CoreCompileInputs.cache
+C:\Users\Loke\source\repos\ChatTCP\ChatTCP-Host\obj\Debug\net8.0-windows\ChatTCP-Host.sourcelink.json
+C:\Users\Loke\source\repos\ChatTCP\ChatTCP-Host\build\Debug\net8.0-windows\ChatTCP-Host.exe
+C:\Users\Loke\source\repos\ChatTCP\ChatTCP-Host\build\Debug\net8.0-windows\ChatTCP-Host.dll.config
+C:\Users\Loke\source\repos\ChatTCP\ChatTCP-Host\build\Debug\net8.0-windows\ChatTCP-Host.deps.json
+C:\Users\Loke\source\repos\ChatTCP\ChatTCP-Host\build\Debug\net8.0-windows\ChatTCP-Host.runtimeconfig.json
+C:\Users\Loke\source\repos\ChatTCP\ChatTCP-Host\build\Debug\net8.0-windows\ChatTCP-Host.dll
+C:\Users\Loke\source\repos\ChatTCP\ChatTCP-Host\build\Debug\net8.0-windows\ChatTCP-Host.pdb
+C:\Users\Loke\source\repos\ChatTCP\ChatTCP-Host\obj\Debug\net8.0-windows\ChatTCP-Host.dll
+C:\Users\Loke\source\repos\ChatTCP\ChatTCP-Host\obj\Debug\net8.0-windows\refint\ChatTCP-Host.dll
+C:\Users\Loke\source\repos\ChatTCP\ChatTCP-Host\obj\Debug\net8.0-windows\ChatTCP-Host.pdb
+C:\Users\Loke\source\repos\ChatTCP\ChatTCP-Host\obj\Debug\net8.0-windows\ChatTCP-Host.genruntimeconfig.cache
+C:\Users\Loke\source\repos\ChatTCP\ChatTCP-Host\obj\Debug\net8.0-windows\ref\ChatTCP-Host.dll
