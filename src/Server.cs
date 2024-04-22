@@ -23,12 +23,14 @@ namespace ChatTCP
         public string serverName;
         public User[] users = new User[MAX_USERS];
 
+        // Private server stuffs
         private bool serverRunning;
         private TextBox serverOutput;
 
         // Network stuffs
         TcpListener listener;
 
+        // Server constructor
         public Server(int maxUsers, string ipAddr, string serverName)
         {
             this.maxUsers = maxUsers;
@@ -40,23 +42,27 @@ namespace ChatTCP
         }
 
         // Initialize the server
-        public void MakeServer()
+        public async void MakeServer()
         {
             if (listener != null)
             {
-                Console.WriteLine("Server already exists.");
+                MessageBox.Show(
+                    "Server is already initialized.",
+                    "Error - Server",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
 
-            listener = new TcpListener(IPAddress.Any, 8000);
+            listener = new TcpListener(IPAddress.Any, 27015);
             listener.Start();
 
             serverRunning = true;
 
             serverOutput = MainClient.serverOutput;
-            AppendServerOutputText("Server: Server initialized!");
+            AppendServerOutputText($"<Server>: Server \"{serverName}\" initialized!");
 
-            DisplayServerOutput();
+            await DisplayServerOutput();
         }
 
         public async Task DisplayServerOutput()
@@ -72,27 +78,29 @@ namespace ChatTCP
         {
             using (client)
             {
-                NetworkStream stream = client.GetStream();
+                Stream stream = client.GetStream();
                 byte[] buffer = new byte[1024];
                 int bytesRead;
 
                 while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
                 {
-                    string data = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+                    string data = Encoding.Default.GetString(buffer, 0, bytesRead);
                     AppendServerOutputText("Received: " + data);
+                    MessageBox.Show("Received: " + data);
                 }
             }
         }
 
+        // Append text to the server output
         public void AppendServerOutputText(string input)
         {
-            if (MainClient.serverOutput.InvokeRequired)
+            if (serverOutput.InvokeRequired)
             {
-                MainClient.serverOutput.BeginInvoke(new Action<string>(AppendServerOutputText), input);
+                serverOutput.BeginInvoke(new Action<string>(AppendServerOutputText), input);
             }
             else
             {
-                MainClient.serverOutput.AppendText(input + Environment.NewLine);
+                serverOutput.AppendText(input + Environment.NewLine);
             }
         }
 

@@ -294,14 +294,26 @@ namespace ChatTCP
                     continue;
                 }
 
-                if (ipInput == server?.ipAddr)
+                if (ipInput == server.ipAddr)
                 {
                     // The client has found a server
                     foundServer = true;
 
+                    // The user's already connected to the found server
+                    if (localUser.currServer == server)
+                    {
+                        MessageBox.Show(
+                            "You are already connected to this server!",
+                            "Info - Connecting",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                        return false;
+                    }
+
                     // Connect the user to the server
-                    //localUser.socket.BeginConnect(ipInput, 8001, null, null);
-                    localUser.client.Connect(IPAddress.Parse(ipInput), 8000);
+                    localUser.client.Connect(IPAddress.Parse(ipInput), 27015);
+                    localUser.currServer = server;
+                    server.AppendServerOutputText($"<Server>: User \"{localUser.username}\" has joined the server!");
                 }
             }
 
@@ -322,6 +334,12 @@ namespace ChatTCP
         // Close the hosted server, when the form is closing
         private void MainClient_FormClosing(object sender, FormClosingEventArgs e)
         {
+            // Inform the other users that a user has left the server
+            if (localUser.currServer != null)
+            {
+                localUser.currServer.AppendServerOutputText($"<Server>: User \"{localUser.username}\" has left the server!");
+            }
+
             if (hostedServer != null)
             {
                 hostedServer.CloseServer();
