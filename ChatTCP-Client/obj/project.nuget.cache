@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "BJK1fON8lpSfFmUEn4ugQne15TiU125O0j3PKPZeQvutxVoemTMEp1HEinlXNhFqQbX73M0681q59UL3iEguCg==",
+  "dgSpecHash": "4buQTUl+L+MgbJyfhh1NX5930ZOfV+MjuDXMxlMz/OiXp2EXQptm24YRHAH8deLSWlO7IKNVTFNspvfLIkKcKg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\ChatTCP-Client\\ChatTCP-Client.csproj",
+  "projectFilePath": "C:\\Users\\Loke\\source\\repos\\ChatTCP\\ChatTCP-Client\\ChatTCP-Client.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Loke.Vigstrand\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
-    "C:\\Users\\Loke.Vigstrand\\.nuget\\packages\\system.data.datasetextensions\\4.5.0\\system.data.datasetextensions.4.5.0.nupkg.sha512"
+    "C:\\Users\\Loke\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\Loke\\.nuget\\packages\\system.data.datasetextensions\\4.5.0\\system.data.datasetextensions.4.5.0.nupkg.sha512"
   ],
   "logs": []
 }

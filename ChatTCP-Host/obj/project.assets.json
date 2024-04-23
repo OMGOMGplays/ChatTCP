@@ -8,23 +8,23 @@
     "net8.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Loke.Vigstrand\\.nuget\\packages\\": {},
+    "C:\\Users\\Loke\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\ChatTCP-Host\\ChatTCP-Host.csproj",
+      "projectUniqueName": "C:\\Users\\Loke\\source\\repos\\ChatTCP\\ChatTCP-Host\\ChatTCP-Host.csproj",
       "projectName": "ChatTCP-Host",
-      "projectPath": "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\ChatTCP-Host\\ChatTCP-Host.csproj",
-      "packagesPath": "C:\\Users\\Loke.Vigstrand\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\ChatTCP-Host\\obj\\",
+      "projectPath": "C:\\Users\\Loke\\source\\repos\\ChatTCP\\ChatTCP-Host\\ChatTCP-Host.csproj",
+      "packagesPath": "C:\\Users\\Loke\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Loke\\source\\repos\\ChatTCP\\ChatTCP-Host\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Loke.Vigstrand\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Loke\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -71,7 +71,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

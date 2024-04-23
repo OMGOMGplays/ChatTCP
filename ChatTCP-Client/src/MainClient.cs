@@ -81,25 +81,10 @@ namespace ChatTCP
             }
         }
 
-        // Append text to the server output
-        public void AppendServerOutputText(string input)
-        {
-            // Invoke the method, if it's required to
-            if (serverOutput.InvokeRequired == true)
-            {
-                serverOutput.BeginInvoke(new Action<string>(AppendServerOutputText), input);
-            }
-            else
-            {
-                // Append the input to the server output
-                // This displays server info (e.g. messages and etc.) from the server to the user
-                serverOutput.AppendText(input + Environment.NewLine);
-            }
-        }
-
         // Broadcast the client's servers list to the Host server
         private async void BroadcastServersToHost()
         {
+            // For every server in the list, update its info
             for (int i = 0; i < openServers.Length; i++)
             {
                 // Can't send info of a null server
@@ -141,6 +126,22 @@ namespace ChatTCP
                     localClient.Close();
                     Close();
                 }
+            }
+        }
+
+        // Append text to the server output
+        public void AppendServerOutputText(string input)
+        {
+            // Invoke the method, if it's required to
+            if (serverOutput.InvokeRequired == true)
+            {
+                serverOutput.BeginInvoke(new Action<string>(AppendServerOutputText), input);
+            }
+            else
+            {
+                // Append the input to the server output
+                // This displays server info (e.g. messages and etc.) from the server to the user
+                serverOutput.AppendText(input + Environment.NewLine);
             }
         }
         #endregion // CLIENT

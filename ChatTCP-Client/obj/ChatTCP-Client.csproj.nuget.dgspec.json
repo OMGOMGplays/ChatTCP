@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\ChatTCP-Client\\ChatTCP-Client.csproj": {}
+    "C:\\Users\\Loke\\source\\repos\\ChatTCP\\ChatTCP-Client\\ChatTCP-Client.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\ChatTCP-Client\\ChatTCP-Client.csproj": {
+    "C:\\Users\\Loke\\source\\repos\\ChatTCP\\ChatTCP-Client\\ChatTCP-Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\ChatTCP-Client\\ChatTCP-Client.csproj",
+        "projectUniqueName": "C:\\Users\\Loke\\source\\repos\\ChatTCP\\ChatTCP-Client\\ChatTCP-Client.csproj",
         "projectName": "ChatTCP-Client",
-        "projectPath": "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\ChatTCP-Client\\ChatTCP-Client.csproj",
-        "packagesPath": "C:\\Users\\Loke.Vigstrand\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Loke.Vigstrand\\Skolprojekt\\VS22\\ChatTCP\\ChatTCP-Client\\obj\\",
+        "projectPath": "C:\\Users\\Loke\\source\\repos\\ChatTCP\\ChatTCP-Client\\ChatTCP-Client.csproj",
+        "packagesPath": "C:\\Users\\Loke\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Loke\\source\\repos\\ChatTCP\\ChatTCP-Client\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Loke.Vigstrand\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Loke\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -77,7 +77,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
