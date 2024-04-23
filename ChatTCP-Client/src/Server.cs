@@ -18,23 +18,23 @@ namespace ChatTCP
         public const int MAX_USERS = 64;
 
         // Server stuffs
-        public int maxUsers;
-        public string ipAddr;
+        public int serverMaxUsers;
+        public string serverIP;
         public string serverName;
         public User[] users = new User[MAX_USERS];
+        public bool serverRunning;
 
         // Private server stuffs
-        private bool serverRunning;
         private TextBox serverOutput;
 
         // Network stuffs
         TcpListener listener;
 
         // Server constructor
-        public Server(int maxUsers, string ipAddr, string serverName)
+        public Server(int serverMaxUsers, string serverIP, string serverName)
         {
-            this.maxUsers = maxUsers;
-            this.ipAddr = ipAddr;
+            this.serverMaxUsers = serverMaxUsers;
+            this.serverIP = serverIP;
             this.serverName = serverName;
 
             // Make the server properly
@@ -60,7 +60,7 @@ namespace ChatTCP
             serverRunning = true;
 
             serverOutput = Program.mainClient.serverOutput;
-            AppendServerOutputText($"<Server>: Server \"{serverName}\" initialized!");
+            Program.mainClient.AppendServerOutputText($"<Server>: Server \"{serverName}\" initialized!");
 
             DisplayServerOutput();
         }
@@ -85,24 +85,24 @@ namespace ChatTCP
                 while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
                 {
                     string data = Encoding.Default.GetString(buffer, 0, bytesRead);
-                    AppendServerOutputText("Received: " + data);
+                    Program.mainClient.AppendServerOutputText("Received: " + data);
                     MessageBox.Show("Received: " + data);
                 }
             }
         }
 
         // Append text to the server output
-        public void AppendServerOutputText(string input)
-        {
-            if (serverOutput.InvokeRequired)
-            {
-                serverOutput.BeginInvoke(new Action<string>(AppendServerOutputText), input);
-            }
-            else
-            {
-                serverOutput.AppendText(input + Environment.NewLine);
-            }
-        }
+        //public void AppendServerOutputText(string input)
+        //{
+        //    if (serverOutput.InvokeRequired)
+        //    {
+        //        serverOutput.BeginInvoke(new Action<string>(AppendServerOutputText), input);
+        //    }
+        //    else
+        //    {
+        //        serverOutput.AppendText(input + Environment.NewLine);
+        //    }
+        //}
 
         // Close the server
         public void CloseServer()
