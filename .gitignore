@@ -1,4 +1,11 @@
-*.vsidx
-bin/*
+# Client
+ChatTCP-Client/bin/*
+ChatTCP-Client/obj/*
+
+# Host
+ChatTCP-Host/bin/*
+ChatTCP-Host/obj/*
+
+# Shared
 .vs/*
-obj/*
+*.vsidx

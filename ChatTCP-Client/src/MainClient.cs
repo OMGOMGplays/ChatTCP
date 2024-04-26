@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 #pragma warning disable CA1416 // Disable annoying squiggly lines informing about old Windows support
@@ -20,25 +10,38 @@ namespace ChatTCP
 {
     public partial class MainClient : Form
     {
+        ////////////////////////////
         // Constant variables
-        public const int MAX_IP_LEN = 32; // Max length of an IP address
+        ////////////////////////////
+
+        // Max length of an IP address
+        public const int MAX_IP_LEN = 32;
 
         // Sourced from:
         // https://www.oreilly.com/library/view/regular-expressions-cookbook/9780596802837/ch07s16.html
         // Is to be used to determine whether or not an input is a valid IP address or not, through a Regex check
         public const string IP_PATTERN = @"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$";
 
+        ////////////////////////////
         // Servers
+        ////////////////////////////
+
         // !! IF THE ARRAY SIZE IS CHANGED HERE, CHANGE IT IN THE HOST PROGRAM TOO !!
         private Server[] openServers = new Server[2048];
 
+        ////////////////////////////
         // Local
+        ////////////////////////////
+
         private User localUser;
 
         // Used to connecting to a ChatTCP-Host
         public TcpClient localClient;
 
+        ////////////////////////////
         // Hosting
+        ////////////////////////////
+
         private int serverMaxUsers;
         private string serverIP;
         private string serverName;
@@ -55,12 +58,12 @@ namespace ChatTCP
 
             // Make a new local client and connect to the main ChatTCP-Host server
             localClient = new TcpClient();
-            ConnectClientToHostServer();
+            ConnectToHostServer();
         }
 
         #region CLIENT
         // Connect the client to the host server
-        async void ConnectClientToHostServer()
+        private async void ConnectToHostServer()
         {
             try
             {
@@ -78,54 +81,6 @@ namespace ChatTCP
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 Close();
-            }
-        }
-
-        // Broadcast the client's servers list to the Host server
-        private async void BroadcastServersToHost()
-        {
-            // For every server in the list, update its info
-            for (int i = 0; i < openServers.Length; i++)
-            {
-                // Can't send info of a null server
-                if (openServers[i] == null)
-                {
-                    continue;
-                }
-
-                Stream stream = localClient.GetStream();
-
-                // Server list buffer
-                byte[] serversBuffer = new byte[openServers.Length];
-
-                // Server variables
-                byte[] serverIPBuffer = Encoding.ASCII.GetBytes(openServers[i]?.serverIP);
-                byte[] serverMaxUsersBuffer = new byte[(int)openServers[i]?.serverMaxUsers];
-                byte[] serverNameBuffer = Encoding.ASCII.GetBytes(openServers[i]?.serverName);
-
-                //serversBuffer[i] = servers[i];
-
-                try
-                {
-                    // Make sure the server exists on the Host server first
-                    await stream.WriteAsync(serversBuffer, 0, serversBuffer.Length);
-
-                    // Write server info to the Host server
-                    stream.Write(serverIPBuffer, 0, serverIPBuffer.Length);
-                    stream.Write(serverMaxUsersBuffer, 0, serverMaxUsersBuffer.Length);
-                    stream.Write(serverNameBuffer, 0, serverNameBuffer.Length);
-                }
-                catch (Exception e)
-                {
-                    // The client somehow failed to talk with the Host server
-                    MessageBox.Show(
-                        $"Error sending server info to ChatTCP-Host server!\n({e.Message}",
-                        "Error - Client",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                    localClient.Close();
-                    Close();
-                }
             }
         }
 
@@ -197,10 +152,13 @@ namespace ChatTCP
 
         private void IPConnect_Click(object sender, EventArgs e)
         {
+            // Update the client's server list
+            //GetServersFromHost();
+
             // Make sure the IP address is a valid one
             if (IsValidIP(ipInput.Text, out string output))
             {
-                // Make a random username for those without a specified username
+                // Make a randomly generated username for those without a specified username
                 if (string.IsNullOrEmpty(localUser.username))
                 {
                     Random rnd = new Random();
@@ -233,7 +191,7 @@ namespace ChatTCP
 
         private void MaxUsersInput_TextChanged(object sender, EventArgs e)
         {
-            // Can't set null as a user count
+            // Can't set null as a user count, so default to MAX_USERS
             if (string.IsNullOrEmpty(maxUserInput.Text))
             {
                 serverMaxUsers = Server.MAX_USERS;
@@ -306,7 +264,7 @@ namespace ChatTCP
                 // Make the server and fill its variables
                 hostedServer = new Server(serverMaxUsers, serverIP, serverName);
 
-                // Add the hosted server to the server list and try to have the localUser join the server
+                // Add the hosted server to the server list
                 for (int i = 0; i < openServers.Length; i++)
                 {
                     if (openServers[i] == null)
@@ -328,7 +286,8 @@ namespace ChatTCP
                     MessageBoxIcon.Information);
 #endif // DEBUG
 
-                BroadcastServersToHost();
+                // Inform the Host server that it should update its list of servers
+                localClient.SendBufferSize = 1;
 
                 // If we can't connect, then remove the server
                 if (!TryConnect(serverIP))
@@ -399,7 +358,7 @@ namespace ChatTCP
                     {
                         MessageBox.Show(
                             "You are already connected to this server!",
-                            "Info - Connecting",
+                            "Warning - Connecting",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Warning);
                         return false;
@@ -408,13 +367,14 @@ namespace ChatTCP
                     // Connect the user to the server
                     localUser.client.Connect(IPAddress.Parse(ipInput), 27014);
                     localUser.currServer = server;
+
                     AppendServerOutputText($"<Server>: User \"{localUser.username}\" has joined the server!");
                 }
             }
 
+            // Show an info box saying that no server's been found
             if (!foundServer)
             {
-                // Show an info box saying that no server's been found
                 MessageBox.Show(
                     $"Couldn't find a server with the IP address of \"{ipInput}\"",
                     "Info - Connecting",

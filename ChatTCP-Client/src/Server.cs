@@ -44,6 +44,7 @@ namespace ChatTCP
         // Initialize the server
         public async void MakeServer()
         {
+            // Make sure the server isn't already initialized
             if (listener != null)
             {
                 MessageBox.Show(
@@ -54,17 +55,21 @@ namespace ChatTCP
                 return;
             }
 
+            // Make a new listener and start it
             listener = new TcpListener(IPAddress.Any, 27014);
             listener.Start();
 
             serverRunning = true;
 
+            // Append any server output needed
             serverOutput = Program.mainClient.serverOutput;
             Program.mainClient.AppendServerOutputText($"<Server>: Server \"{serverName}\" initialized!");
 
+            // Display misc. server outputs
             DisplayServerOutput();
         }
 
+        // Output server stuffs
         public async void DisplayServerOutput()
         {
             while (serverRunning)
@@ -74,6 +79,7 @@ namespace ChatTCP
             }
         }
 
+        // Handle the data from a client
         public async Task HandleData(TcpClient client)
         {
             using (client)
@@ -90,19 +96,6 @@ namespace ChatTCP
                 }
             }
         }
-
-        // Append text to the server output
-        //public void AppendServerOutputText(string input)
-        //{
-        //    if (serverOutput.InvokeRequired)
-        //    {
-        //        serverOutput.BeginInvoke(new Action<string>(AppendServerOutputText), input);
-        //    }
-        //    else
-        //    {
-        //        serverOutput.AppendText(input + Environment.NewLine);
-        //    }
-        //}
 
         // Close the server
         public void CloseServer()

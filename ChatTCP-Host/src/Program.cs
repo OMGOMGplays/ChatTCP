@@ -10,15 +10,18 @@ using System.Threading.Tasks;
 namespace ChatTCP.Host
 {
     // This is the ChatTCP-Host server, every client should try to connect to this upon booting up
-    // This is primarily to send server info amongst every client
     // If the host isn't active, tough luck, you won't be able to use the client
+    // This is primarily to send server info amongst every client
     internal class Program
     {
         // !! IF THE SERVER ARRAY SIZE IS CHANGED HERE, CHANGE IT IN THE CLIENT TOO !!
         private static Server[] openServers = new Server[2048];
 
-        // Used to handle server stuffs
+        // Used to handle server info
         private static TcpListener listener;
+
+        // Amount of connected clients
+        private static TcpClient[] clients = new TcpClient[2048];
 
         // Start the program
         public static void Main()
@@ -35,47 +38,48 @@ namespace ChatTCP.Host
             listener.Start();
 
             // The server has been initialized!
-            Console.WriteLine("ChatTCP-Host server started!" + Environment.NewLine);
+            Console.WriteLine("ChatTCP-Host server started!\n");
 
             // Handle clients connecting, and updating server list info
             while (active)
             {
-                // Accept clients
-                TcpClient connectedClient = listener.AcceptTcpClient();
-                Console.WriteLine("Client connected!");
-
-                // If the client has data to send, receive it
-                if (connectedClient.ReceiveBufferSize > 0)
+                try
                 {
-                    Stream stream = connectedClient.GetStream();
-                    byte[] buffer = new byte[connectedClient.ReceiveBufferSize];
+                    // Accept clients
+                    TcpClient client = listener.AcceptTcpClient();
 
-                    Console.WriteLine($"Receiving new server info from client(s)...");
-
-                    for (int i = 0; i < openServers.Length; i++)
+                    // Add the client to the list
+                    for (int i = 0; i < clients.Length; i++)
                     {
-                        Server currServer = openServers[i];
-
-                        // Set the openServers list appropriately
-                        currServer = stream.Read(buffer, 0, buffer.Length) != 0 ? new Server() : null;
-
-                        if (currServer != null)
+                        if (clients[i] == null)
                         {
-                            // Get the server's info from the buffer
-                            currServer.serverIP = Encoding.ASCII.GetString(buffer, 0, buffer.Length);
-                            currServer.serverMaxUsers = stream.Read(buffer, 0, buffer.Length);
-                            currServer.serverName = Encoding.ASCII.GetString(buffer, 0, buffer.Length);
+                            clients[i] = client;
+                            break;
                         }
-
-                        // Show which servers are now open at which index
-                        Console.WriteLine($"Server info of the server at the index of {i + 1} is:\n" +
-                            $"  IP: {currServer?.serverIP}\n" +
-                            $"  Max Users: {currServer?.serverMaxUsers}\n" +
-                            $"  Name: \"{currServer?.serverName}\"\n");
                     }
+
+                    Console.WriteLine("Client connected!");
+                }
+                catch (Exception e)
+                {
+                    // Just incase we get an error...
+                    Console.Error.WriteLine($"Error accepting client!\n{e.Message}");
+                    Environment.Exit(-1);
                 }
 
+                foreach (TcpClient client in clients)
+                {
+                    // Skip over any null clients
+                    if (client == null)
+                    {
+                        continue;
+                    }
 
+                    byte[] serverBuffer = new byte[openServers.Length];
+
+                    client.GetStream().Read(serverBuffer, 0, serverBuffer.Length);
+                    Console.WriteLine("Wrote server to client!");
+                }
             }
         }
     }
